@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CatgeroyRequest extends FormRequest
+class PostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,9 @@ class CatgeroyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string'
+            'title' => 'required|string',
+            'post_text' => 'required|string',
+            'category_id' => 'required|integer',
         ];
     }
 }

@@ -27,12 +27,10 @@ class CategoryServie implements Crud
 
     public function update(FormRequest $request, Model $model)
     {
-        try {
-            $model->name = $request->name;
-           return  $model->save();
-        }catch (\Exception $e){
-            return $e->getMessage();
-        }
+
+
+           return  $model->update($request->validated());
+
 
     }
 

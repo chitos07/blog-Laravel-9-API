@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\interfaces\Crud;
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -10,27 +11,27 @@ class PostService implements Crud
 {
     public function index()
     {
-        // TODO: Implement index() method.
+       return Post::all();
     }
 
     public function store(FormRequest $request)
     {
-        // TODO: Implement store() method.
+        return Post::create($request->validated());
     }
 
     public function show(Model $model)
     {
-        // TODO: Implement show() method.
+       return $model;
     }
 
     public function update(FormRequest $request, Model $model)
     {
-        // TODO: Implement update() method.
+       return $model->update($request->validated());
     }
 
     public function destroy(Model $model)
     {
-        // TODO: Implement destroy() method.
+       return $model->deleteOrFail();
     }
 
 }

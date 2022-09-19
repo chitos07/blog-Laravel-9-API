@@ -19,10 +19,32 @@ use Illuminate\Support\Facades\Route;
 //});
 
 
- //Category Route
+Route::get('/',function (){
+   return 'WWelcome';
+});
 
-Route::get('/category',[\App\Http\Controllers\CategoryController::class,'index']);
-Route::post('/category',[\App\Http\Controllers\CategoryController::class,'store']);
-Route::get('/category/{category}',[\App\Http\Controllers\CategoryController::class,'show']);
-Route::put('/category/{category}',[\App\Http\Controllers\CategoryController::class,'update']);
-Route::delete('/category/{category}',[\App\Http\Controllers\CategoryController::class,'destroy']);
+Route::post('/login',[\App\Http\Controllers\Auth\AuthController::class,'Login']);
+
+ Route::group(['middleware' => ['auth:sanctum']],function(){
+
+     //Category Routes
+
+     Route::get('/category',[\App\Http\Controllers\CategoryController::class,'index']);
+     Route::post('/category',[\App\Http\Controllers\CategoryController::class,'store']);
+     Route::get('/category/{category}',[\App\Http\Controllers\CategoryController::class,'show']);
+     Route::put('/category/{category}',[\App\Http\Controllers\CategoryController::class,'update']);
+     Route::delete('/category/{category}',[\App\Http\Controllers\CategoryController::class,'destroy']);
+
+     //Post Route
+
+     Route::get('/post',[\App\Http\Controllers\PostController::class,'index']);
+     Route::post('/post',[\App\Http\Controllers\PostController::class,'store']);
+     Route::get('/post/{post}',[\App\Http\Controllers\PostController::class,'show']);
+     Route::put('/post/{post}',[\App\Http\Controllers\PostController::class,'update']);
+     Route::delete('/post/{post}',[\App\Http\Controllers\PostController::class,'destroy']);
+ });
+
+
+
+
+
