@@ -23,6 +23,8 @@ class AuthController extends Controller
                 'token' => $token->plainTextToken
             ]);
         }
+
+        return response()->json('Invalid info');
     }
 
 }

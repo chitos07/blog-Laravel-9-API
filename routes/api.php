@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\Auth\PasswordRestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,10 +26,16 @@ Route::get('/',function (){
 
 Route::post('/login',[\App\Http\Controllers\Auth\AuthController::class,'Login']);
 
+Route::post('/forgot-password',[PasswordRestController::class,'SendLink'])->middleware('guest')->name('password.email');
+
+Route::post('/reset-password/{token}', [PasswordRestController::class,'PasswordRest'])->middleware('guest')->name('password.reset');
+
+
+
+
  Route::group(['middleware' => ['auth:sanctum']],function(){
 
      //Category Routes
-
      Route::get('/category',[\App\Http\Controllers\CategoryController::class,'index']);
      Route::post('/category',[\App\Http\Controllers\CategoryController::class,'store']);
      Route::get('/category/{category}',[\App\Http\Controllers\CategoryController::class,'show']);
