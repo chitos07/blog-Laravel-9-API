@@ -25,6 +25,7 @@ Route::get('/',function (){
 });
 
 Route::post('/login',[\App\Http\Controllers\Auth\AuthController::class,'Login']);
+Route::post('/register',[\App\Http\Controllers\Auth\AuthController::class,'register']);
 
 Route::post('/forgot-password',[PasswordRestController::class,'SendLink'])->middleware('guest')->name('password.email');
 
@@ -34,6 +35,11 @@ Route::post('/reset-password/{token}', [PasswordRestController::class,'PasswordR
 
 
  Route::group(['middleware' => ['auth:sanctum']],function(){
+
+     //Email Verify
+
+     Route::get('/email/verify/{id}/{hash}',[\App\Http\Controllers\Auth\EmailVerificationController::class,'verify'])
+         ->middleware(['signed'])->name('verification.verify');
 
      //Category Routes
      Route::get('/category',[\App\Http\Controllers\CategoryController::class,'index']);
