@@ -28,15 +28,21 @@ class CategoryServie implements Crud
     public function update(FormRequest $request, Model $model)
     {
 
-
-           return  $model->update($request->validated());
+           $data =   $model->update($request->validated());
+           if($data){
+            return response()->json('Record Updated');
+         }
 
 
     }
 
     public function destroy(Model $model)
     {
-      return $model->deleteOrFail();
+      if($model->deleteOrFail()){
+
+            return response()->json('',204);
+
+      };
 
 
     }

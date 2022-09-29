@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\interfaces\Crud;
 use App\Models\Post;
 use App\Services\CrudOpreation;
 use App\Services\PostService;
@@ -11,16 +12,16 @@ use App\Services\PostService;
 class PostController extends Controller
 {
     /**
-     * @var CrudOpreation
+     * @var Crud
      */
-    private $CrudOpreation;
+    private  Crud $CrudOpreation;
 
     /**
      * @param $CrudOpreation
      */
     public function __construct()
     {
-        $this->CrudOpreation = new CrudOpreation(new PostService());
+        $this->CrudOpreation =  new PostService();
     }
 
 
@@ -45,54 +46,17 @@ class PostController extends Controller
         return $this->getCrudOpreation()->destroy($post);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
-     * @return CrudOpreation
+     * @return Crud
      */
-    public function getCrudOpreation(): CrudOpreation
+    public function getCrudOpreation(): Crud
     {
         return $this->CrudOpreation;
     }
+
+
+
+
 
 
 
